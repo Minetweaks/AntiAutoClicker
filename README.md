@@ -9,10 +9,22 @@ A Paper plugin designed to detect and combat automated clicking tools like KillA
   - Analyzes cooldown precision (KillAura attacks at precise intervals)
   - Calculates suspicion scores based on multiple factors
 
-- **Captcha System**: Issues math/word/sequence challenges to suspected players
+- **GUI Captcha System**: Interactive inventory-based challenges
+  - Players must drag a glowing redstone to a chest among decoy items
   - Configurable interval (default: 30 minutes)
   - 2-minute response timeout
-  - Multiple attempt allowance before action
+  - Detects cheating (attacking/moving while captcha is open)
+
+- **Tiered Punishment System**: Escalating consequences for repeat offenders
+  - First offense: Kick
+  - Second offense: 1-hour tempban
+  - Third offense: 24-hour ban
+  - Fourth+ offense: Permanent ban
+  - All tiers fully configurable with custom commands
+
+- **Persistent Storage**: SQLite or MySQL support
+  - Tracks player failure counts across restarts
+  - Stores captcha history and attack statistics
 
 - **Discord Integration**: Sends detailed reports via webhook when players fail verification
   - Player name, UUID, and masked IP
@@ -36,7 +48,7 @@ The plugin analyzes attack patterns to detect KillAura-like behavior:
 2. **Cooldown Precision**: KillAura attacks at 90-98% of attack cooldown, which is detectable
 3. **Sustained Attack Rate**: High attack rates maintained over time indicate automation
 
-When a player reaches a threshold of attacks (configurable), they receive a captcha challenge. If they fail to respond correctly within the timeout, a report is sent to Discord and the player is kicked.
+When a player reaches the attack threshold (configurable), they receive a GUI captcha challenge. They must drag the glowing redstone item to the chest among many decoy items. If they fail, timeout, or are detected attacking/moving with the GUI open, punishments escalate based on their total failure count.
 
 ## Configuration
 
@@ -52,6 +64,10 @@ captcha-timeout-seconds: 120
 
 # Minimum number of entity attacks required before captcha is issued
 minimum-attacks-for-captcha: 100
+
+# Storage type: "sqlite" or "mysql"
+storage:
+  type: sqlite
 ```
 
 ## Permissions
