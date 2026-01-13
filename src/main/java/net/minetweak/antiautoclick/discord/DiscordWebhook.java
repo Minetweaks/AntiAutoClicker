@@ -2,12 +2,12 @@
  * AntiAutoClicker - Paper Plugin to detect automated clicking
  * Copyright (c) 2026
  */
-package net.swift.antiautoclick.discord;
+package net.minetweak.antiautoclick.discord;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import net.swift.antiautoclick.AntiAutoClickerPlugin;
-import net.swift.antiautoclick.detection.AttackPatternAnalyzer;
+import net.minetweak.antiautoclick.AntiAutoClickerPlugin;
+import net.minetweak.antiautoclick.detection.AttackPatternAnalyzer;
 import org.bukkit.entity.Player;
 
 import java.io.OutputStream;

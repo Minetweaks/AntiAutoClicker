@@ -2,19 +2,19 @@
  * AntiAutoClicker - Paper Plugin to detect automated clicking
  * Copyright (c) 2026
  */
-package net.swift.antiautoclick;
+package net.minetweak.antiautoclick;
 
 import net.kyori.adventure.text.Component;
-import net.swift.antiautoclick.captcha.CaptchaManager;
-import net.swift.antiautoclick.commands.AntiAutoClickerCommands;
-import net.swift.antiautoclick.config.MessageManager;
-import net.swift.antiautoclick.detection.AttackPatternAnalyzer;
-import net.swift.antiautoclick.discord.DiscordWebhook;
-import net.swift.antiautoclick.listeners.CombatListener;
-import net.swift.antiautoclick.listeners.ChatListener;
-import net.swift.antiautoclick.listeners.CaptchaGuiListener;
-import net.swift.antiautoclick.storage.StorageFactory;
-import net.swift.antiautoclick.storage.StorageProvider;
+import net.minetweak.antiautoclick.captcha.CaptchaManager;
+import net.minetweak.antiautoclick.commands.AntiAutoClickerCommands;
+import net.minetweak.antiautoclick.config.MessageManager;
+import net.minetweak.antiautoclick.detection.AttackPatternAnalyzer;
+import net.minetweak.antiautoclick.discord.DiscordWebhook;
+import net.minetweak.antiautoclick.listeners.CombatListener;
+import net.minetweak.antiautoclick.listeners.ChatListener;
+import net.minetweak.antiautoclick.listeners.CaptchaGuiListener;
+import net.minetweak.antiautoclick.storage.StorageFactory;
+import net.minetweak.antiautoclick.storage.StorageProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.incendo.cloud.annotations.AnnotationParser;
 import org.incendo.cloud.execution.ExecutionCoordinator;

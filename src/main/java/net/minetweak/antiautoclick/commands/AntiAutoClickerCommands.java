@@ -2,12 +2,12 @@
  * AntiAutoClicker - Paper Plugin to detect automated clicking
  * Copyright (c) 2026
  */
-package net.swift.antiautoclick.commands;
+package net.minetweak.antiautoclick.commands;
 
 import net.kyori.adventure.text.format.NamedTextColor;
-import net.swift.antiautoclick.AntiAutoClickerPlugin;
-import net.swift.antiautoclick.config.MessageManager;
-import net.swift.antiautoclick.detection.AttackPatternAnalyzer;
+import net.minetweak.antiautoclick.AntiAutoClickerPlugin;
+import net.minetweak.antiautoclick.config.MessageManager;
+import net.minetweak.antiautoclick.detection.AttackPatternAnalyzer;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;

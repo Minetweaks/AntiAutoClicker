@@ -2,9 +2,9 @@
  * AntiAutoClicker - Paper Plugin to detect automated clicking
  * Copyright (c) 2026
  */
-package net.swift.antiautoclick.storage;
+package net.minetweak.antiautoclick.storage;
 
-import net.swift.antiautoclick.AntiAutoClickerPlugin;
+import net.minetweak.antiautoclick.AntiAutoClickerPlugin;
 
 import java.io.File;
 import java.sql.*;

@@ -1,7 +1,7 @@
 name: AntiAutoClicker
 version: ${version}
-main: net.swift.antiautoclick.AntiAutoClickerPlugin
+main: net.minetweak.antiautoclick.AntiAutoClickerPlugin
 description: Detects automated clicking patterns and issues captcha challenges
 api-version: "1.21"
 authors:
-  - Swift
+  - Minetweak

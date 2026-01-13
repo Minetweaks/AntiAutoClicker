@@ -2,11 +2,11 @@
  * AntiAutoClicker - Paper Plugin to detect automated clicking
  * Copyright (c) 2026
  */
-package net.swift.antiautoclick.listeners;
+package net.minetweak.antiautoclick.listeners;
 
 import io.papermc.paper.event.player.AsyncChatEvent;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
-import net.swift.antiautoclick.AntiAutoClickerPlugin;
+import net.minetweak.antiautoclick.AntiAutoClickerPlugin;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;

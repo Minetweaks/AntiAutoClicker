@@ -3,7 +3,7 @@ plugins {
     id("com.gradleup.shadow") version "8.3.0"
 }
 
-group = "net.swift"
+group = "net.minetweak"
 version = "1.0.0"
 
 java {
@@ -30,9 +30,9 @@ dependencies {
 tasks {
     shadowJar {
         archiveClassifier.set("")
-        relocate("org.incendo.cloud", "net.swift.antiautoclick.libs.cloud")
-        relocate("com.google.gson", "net.swift.antiautoclick.libs.gson")
-        relocate("io.leangen.geantyref", "net.swift.antiautoclick.libs.geantyref")
+        relocate("org.incendo.cloud", "net.minetweak.antiautoclick.libs.cloud")
+        relocate("com.google.gson", "net.minetweak.antiautoclick.libs.gson")
+        relocate("io.leangen.geantyref", "net.minetweak.antiautoclick.libs.geantyref")
     }
     
     processResources {

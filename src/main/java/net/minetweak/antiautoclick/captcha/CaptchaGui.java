@@ -2,11 +2,11 @@
  * AntiAutoClicker - Paper Plugin to detect automated clicking
  * Copyright (c) 2026
  */
-package net.swift.antiautoclick.captcha;
+package net.minetweak.antiautoclick.captcha;
 
 import net.kyori.adventure.text.Component;
-import net.swift.antiautoclick.AntiAutoClickerPlugin;
-import net.swift.antiautoclick.config.MessageManager;
+import net.minetweak.antiautoclick.AntiAutoClickerPlugin;
+import net.minetweak.antiautoclick.config.MessageManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
