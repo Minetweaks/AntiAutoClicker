@@ -8,6 +8,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.minetweak.antiautoclick.AntiAutoClickerPlugin;
 import net.minetweak.antiautoclick.detection.AttackPatternAnalyzer;
+import net.minetweak.antiautoclick.util.SchedulerUtil;
 import org.bukkit.entity.Player;
 
 import java.io.OutputStream;
@@ -42,8 +43,8 @@ public class DiscordWebhook {
             return;
         }
         
-        // Run async to not block main thread
-        plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> {
+        // Run async to not block region thread
+        SchedulerUtil.runAsync(plugin, () -> {
             try {
                 sendWebhook(webhookUrl, buildPayload(player, summary));
                 plugin.getLogger().info("Discord webhook sent for player: " + player.getName());

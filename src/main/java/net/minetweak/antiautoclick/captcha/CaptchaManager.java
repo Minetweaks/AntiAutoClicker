@@ -10,10 +10,10 @@ import net.minetweak.antiautoclick.AntiAutoClickerPlugin;
 import net.minetweak.antiautoclick.config.MessageManager;
 import net.minetweak.antiautoclick.detection.AttackPatternAnalyzer;
 import net.minetweak.antiautoclick.storage.StorageProvider;
+import net.minetweak.antiautoclick.util.SchedulerUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitTask;
 
 import java.time.Duration;
 import java.util.*;
@@ -83,8 +83,8 @@ public class CaptchaManager {
         // Save to storage
         savePlayerStats(player);
         
-        // Open GUI on main thread
-        plugin.getServer().getScheduler().runTask(plugin, () -> {
+        // Open GUI on player's thread
+        SchedulerUtil.runTask(plugin, player, () -> {
             gui.open();
             
             // Set grace period - don't detect cheating for a moment after opening
@@ -114,7 +114,7 @@ public class CaptchaManager {
         });
         
         // Schedule timeout
-        BukkitTask timeoutTask = plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
+        SchedulerUtil.ScheduledTask timeoutTask = SchedulerUtil.scheduleEntityTask(plugin, player, () -> {
             handleTimeout(player);
         }, timeoutSeconds * 20L);
         
@@ -139,7 +139,7 @@ public class CaptchaManager {
         }
         
         // Close any open GUI
-        plugin.getServer().getScheduler().runTask(plugin, () -> player.closeInventory());
+        SchedulerUtil.runTask(plugin, player, () -> player.closeInventory());
         
         activeSessions.remove(player.getUniqueId());
         activeGuis.remove(player.getUniqueId());
@@ -371,7 +371,7 @@ public class CaptchaManager {
         }
         
         // Close any open GUI
-        plugin.getServer().getScheduler().runTask(plugin, () -> player.closeInventory());
+        SchedulerUtil.runTask(plugin, player, () -> player.closeInventory());
         
         activeSessions.remove(player.getUniqueId());
         activeGuis.remove(player.getUniqueId());
@@ -433,8 +433,8 @@ public class CaptchaManager {
                 .replace("%suspicion%", String.format("%.0f", summary.suspicionScore() * 100))
                 .replace("%failures%", String.valueOf(failureCount));
             
-            // Execute on main thread
-            plugin.getServer().getScheduler().runTask(plugin, () -> {
+            // Execute on global region thread
+            SchedulerUtil.runGlobalTask(plugin, () -> {
                 plugin.getServer().dispatchCommand(
                     plugin.getServer().getConsoleSender(),
                     parsed
@@ -568,7 +568,7 @@ public class CaptchaManager {
      */
     private static class CaptchaSession {
         private final long startTime;
-        private BukkitTask timeoutTask;
+        private SchedulerUtil.ScheduledTask timeoutTask;
         
         CaptchaSession(long startTime) {
             this.startTime = startTime;
@@ -578,11 +578,11 @@ public class CaptchaManager {
             return startTime;
         }
         
-        BukkitTask getTimeoutTask() {
+        SchedulerUtil.ScheduledTask getTimeoutTask() {
             return timeoutTask;
         }
         
-        void setTimeoutTask(BukkitTask task) {
+        void setTimeoutTask(SchedulerUtil.ScheduledTask task) {
             this.timeoutTask = task;
         }
     }

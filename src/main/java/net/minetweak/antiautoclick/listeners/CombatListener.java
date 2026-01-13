@@ -5,6 +5,7 @@
 package net.minetweak.antiautoclick.listeners;
 
 import net.minetweak.antiautoclick.AntiAutoClickerPlugin;
+import net.minetweak.antiautoclick.util.SchedulerUtil;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -13,6 +14,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+
+import java.util.UUID;
 
 /**
  * Listens for combat events to track attack patterns
@@ -83,10 +86,11 @@ public class CombatListener implements Listener {
     public void onPlayerQuit(PlayerQuitEvent event) {
         // Clean up player data when they leave
         // Keep data for a while in case they rejoin quickly
-        plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
-            if (!event.getPlayer().isOnline()) {
-                plugin.getPatternAnalyzer().resetPlayerData(event.getPlayer().getUniqueId());
-                plugin.getCaptchaManager().clearPlayerSession(event.getPlayer().getUniqueId());
+        UUID playerId = event.getPlayer().getUniqueId();
+        SchedulerUtil.runGlobalTaskLater(plugin, () -> {
+            if (plugin.getServer().getPlayer(playerId) == null) {
+                plugin.getPatternAnalyzer().resetPlayerData(playerId);
+                plugin.getCaptchaManager().clearPlayerSession(playerId);
             }
         }, 20 * 60 * 5); // 5 minutes
     }

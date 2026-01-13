@@ -86,7 +86,7 @@ The compiled JAR will be in `build/libs/`.
 
 ## Requirements
 
-- Paper 1.21.4+
+- Paper 1.21.4+ or Folia 1.21.4+
 - Java 21+
 
 ## Dependencies

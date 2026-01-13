@@ -7,6 +7,7 @@ package net.minetweak.antiautoclick.listeners;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import net.minetweak.antiautoclick.AntiAutoClickerPlugin;
+import net.minetweak.antiautoclick.util.SchedulerUtil;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -38,8 +39,8 @@ public class ChatListener implements Listener {
         // Cancel the event so the answer isn't broadcast
         event.setCancelled(true);
         
-        // Handle the answer on the main thread
-        plugin.getServer().getScheduler().runTask(plugin, () -> {
+        // Handle the answer on the player's region thread
+        SchedulerUtil.runTask(plugin, player, () -> {
             plugin.getCaptchaManager().handleAnswer(player, message);
         });
     }

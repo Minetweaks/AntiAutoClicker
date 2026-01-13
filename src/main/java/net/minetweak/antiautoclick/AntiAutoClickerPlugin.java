@@ -15,6 +15,7 @@ import net.minetweak.antiautoclick.listeners.ChatListener;
 import net.minetweak.antiautoclick.listeners.CaptchaGuiListener;
 import net.minetweak.antiautoclick.storage.StorageFactory;
 import net.minetweak.antiautoclick.storage.StorageProvider;
+import net.minetweak.antiautoclick.util.SchedulerUtil;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.incendo.cloud.annotations.AnnotationParser;
 import org.incendo.cloud.execution.ExecutionCoordinator;
@@ -109,7 +110,7 @@ public class AntiAutoClickerPlugin extends JavaPlugin {
             getLogger().warning("DEV MODE ENABLED - Captcha interval set to 2 minutes!");
         }
         
-        getServer().getScheduler().runTaskTimer(this, () -> {
+        SchedulerUtil.runGlobalTaskTimer(this, () -> {
             captchaManager.issueScheduledCaptchas();
         }, intervalTicks, intervalTicks);
     }

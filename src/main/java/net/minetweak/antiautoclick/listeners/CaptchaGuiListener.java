@@ -6,6 +6,7 @@ package net.minetweak.antiautoclick.listeners;
 
 import net.minetweak.antiautoclick.AntiAutoClickerPlugin;
 import net.minetweak.antiautoclick.captcha.CaptchaGui;
+import net.minetweak.antiautoclick.util.SchedulerUtil;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -159,7 +160,7 @@ public class CaptchaGuiListener implements Listener {
             plugin.getCaptchaManager().onGuiClosed(player);
             
             // Reopen the GUI after a short delay (prevent escape)
-            plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
+            SchedulerUtil.runTaskLater(plugin, player, () -> {
                 if (player.isOnline() && plugin.getCaptchaManager().hasActiveCaptcha(player.getUniqueId())) {
                     player.sendMessage(plugin.getMessages().get("captcha.must-complete"));
                     plugin.getCaptchaManager().reopenGui(player);

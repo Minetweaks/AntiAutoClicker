@@ -3,5 +3,6 @@ version: ${version}
 main: net.minetweak.antiautoclick.AntiAutoClickerPlugin
 description: Detects automated clicking patterns and issues captcha challenges
 api-version: "1.21"
+folia-supported: true
 authors:
   - Minetweak
