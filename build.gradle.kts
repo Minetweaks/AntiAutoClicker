@@ -25,6 +25,9 @@ dependencies {
     
     // For Discord webhook (simple HTTP)
     implementation("com.google.code.gson:gson:2.10.1")
+    
+    // bStats for anonymous usage statistics
+    implementation("org.bstats:bstats-bukkit:3.1.0")
 }
 
 tasks {
@@ -33,6 +36,7 @@ tasks {
         relocate("org.incendo.cloud", "net.minetweak.antiautoclick.libs.cloud")
         relocate("com.google.gson", "net.minetweak.antiautoclick.libs.gson")
         relocate("io.leangen.geantyref", "net.minetweak.antiautoclick.libs.geantyref")
+        relocate("org.bstats", "net.minetweak.antiautoclick.libs.bstats")
     }
     
     processResources {

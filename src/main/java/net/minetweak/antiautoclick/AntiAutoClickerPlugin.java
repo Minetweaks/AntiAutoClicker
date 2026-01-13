@@ -4,7 +4,6 @@
  */
 package net.minetweak.antiautoclick;
 
-import net.kyori.adventure.text.Component;
 import net.minetweak.antiautoclick.captcha.CaptchaManager;
 import net.minetweak.antiautoclick.commands.AntiAutoClickerCommands;
 import net.minetweak.antiautoclick.config.MessageManager;
@@ -15,7 +14,9 @@ import net.minetweak.antiautoclick.listeners.ChatListener;
 import net.minetweak.antiautoclick.listeners.CaptchaGuiListener;
 import net.minetweak.antiautoclick.storage.StorageFactory;
 import net.minetweak.antiautoclick.storage.StorageProvider;
+import net.minetweak.antiautoclick.util.MetricsManager;
 import net.minetweak.antiautoclick.util.SchedulerUtil;
+import net.minetweak.antiautoclick.util.UpdateChecker;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.incendo.cloud.annotations.AnnotationParser;
 import org.incendo.cloud.execution.ExecutionCoordinator;
@@ -31,6 +32,8 @@ public class AntiAutoClickerPlugin extends JavaPlugin {
     private MessageManager messageManager;
     private StorageProvider storage;
     private LegacyPaperCommandManager<CommandSender> commandManager;
+    private UpdateChecker updateChecker;
+    private MetricsManager metricsManager;
     
     @Override
     public void onEnable() {
@@ -67,6 +70,15 @@ public class AntiAutoClickerPlugin extends JavaPlugin {
         
         // Start periodic captcha task
         startCaptchaScheduler();
+        
+        // Initialize update checker
+        this.updateChecker = new UpdateChecker(this);
+        getServer().getPluginManager().registerEvents(updateChecker, this);
+        updateChecker.checkForUpdates();
+        
+        // Initialize bStats metrics
+        this.metricsManager = new MetricsManager(this);
+        metricsManager.initialize();
         
         getLogger().info("AntiAutoClicker enabled! Monitoring for automated clicking patterns.");
     }

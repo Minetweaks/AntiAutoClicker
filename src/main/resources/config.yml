@@ -4,6 +4,9 @@
 # minimum attacks threshold for easier testing
 dev-mode: false
 
+# Check for updates on Modrinth and notify admins
+update-checker: true
+
 # Discord webhook URL for reporting failed captchas
 # Leave empty to disable Discord notifications
 discord-webhook-url: ""
