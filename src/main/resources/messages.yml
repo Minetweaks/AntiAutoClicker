@@ -1,0 +1,114 @@
+# AntiAutoClicker Messages Configuration
+# Use & for color codes, %variable% for placeholders
+
+# Prefix for all messages
+prefix: "&6[AntiAutoClick] "
+
+# Captcha messages
+captcha:
+  # Title shown on screen
+  title: "&e⚠ CAPTCHA"
+  subtitle: "&7Drag the REDSTONE to the CHEST!"
+  
+  # Chat messages when captcha is issued
+  issued-header: "&6═══════════════════════════════════"
+  issued-title: "&e       ⚠ VERIFICATION REQUIRED ⚠"
+  issued-instructions: "&aFind the REDSTONE and drag it to the CHEST!"
+  issued-time-warning: "&cYou have %time% seconds!"
+  
+  # Success messages
+  success-chat: "&a✓ CAPTCHA VERIFIED!"
+  success-subtitle: "&7You may continue playing."
+  success-title: "&a✓ VERIFIED"
+  
+  # Failure/timeout messages
+  timeout: "&c⚠ CAPTCHA TIMEOUT! You failed to respond in time."
+  must-complete: "&c⚠ You must complete the captcha!"
+  cheating-detected: "&c⚠ CHEATING DETECTED! You were attacking/moving while the captcha GUI was open!"
+  
+  # Kick message
+  kick-message: "&cYou have been kicked for failing the captcha verification."
+  kick-message-cheating: "&cYou were kicked for attacking/moving while the captcha GUI was open."
+
+# Staff notification messages
+staff:
+  # When captcha is issued to a player
+  captcha-issued: "&7Captcha issued to &e%player% &7(&b#%count% &7total)"
+  
+  # When player fails captcha (includes failure count)
+  captcha-failed: "&e%player% &ffailed captcha verification! &7(Failure #%failures%)"
+  
+  # When player is detected cheating (attacking/moving with GUI open)
+  captcha-cheating: "&c&l⚠ &e%player% &cwas caught attacking/moving with captcha open!"
+  
+  # When player attacks/moves with captcha open (auto-fail)
+  captcha-cheating: "&c⚠ &e%player% &cwas attacking/moving with captcha GUI open!"
+
+# GUI text
+gui:
+  title: "&c&l⚠ CAPTCHA VERIFICATION ⚠"
+  
+  # Chest item
+  chest-name: "&a&l⬇ DROP REDSTONE HERE ⬇"
+  chest-lore:
+    - ""
+    - "&eFind the REDSTONE and drag it"
+    - "&eonto this chest to verify!"
+    - ""
+    - "&cYou have 2 minutes!"
+  
+  # Target item (redstone)
+  target-name: "&c&l✦ DRAG ME TO THE CHEST! ✦"
+  target-lore:
+    - ""
+    - "&7Click and drag this redstone"
+    - "&7to the chest in the middle!"
+  
+  # Filler item names (random)
+  filler-names:
+    - "&7Not this one..."
+    - "&7Try again!"
+    - "&7Wrong item"
+    - "&7Keep looking"
+    - "&7Nope!"
+    - "&7Find the redstone"
+    - "&7???"
+    - "&7Keep searching"
+    - "&7Almost..."
+    - "&7Not here"
+
+# Command messages
+commands:
+  reload-success: "&aConfiguration reloaded!"
+  player-not-found: "&cPlayer not found!"
+  already-has-captcha: "&e%player% &calready has an active captcha!"
+  captcha-issued-to: "&aCaptcha issued to &e%player%"
+  data-reset: "&aData reset for &e%player%"
+  no-players-monitored: "&7No players currently being monitored."
+  webhook-not-configured: "&cDiscord webhook URL is not configured!"
+  webhook-sending: "&eSending test webhook..."
+  must-be-player: "&cMust be a player to test webhook!"
+  
+  # Stats display
+  stats-header: "&6═══ Attack Statistics for &e%player% &6═══"
+  stats-total-attacks: "&7Total Attacks: &f%value%"
+  stats-attacks-per-second: "&7Attacks/Second: &f%value%"
+  stats-timing-consistency: "&7Timing Consistency: %value%"
+  stats-suspicion-score: "&7Suspicion Score: %value%"
+  stats-captcha-eligible: "&7Captcha Eligible: %value%"
+  stats-captcha-count: "&7Captchas Received: &f%value%"
+  
+  # List display
+  list-header: "&6═══ Monitored Players ═══"
+  list-entry: "&7• &e%player% &7- &f%attacks% attacks &7(&c%suspicion%% sus&7)"
+
+# Console/log messages
+log:
+  captcha-issued: "Issued GUI captcha to %player%"
+  captcha-passed: "%player% passed captcha verification"
+  captcha-failed: "%player% failed captcha verification and was reported"
+  captcha-cheating: "%player% was attacking/moving with captcha GUI open - auto-failed"
+  webhook-sent: "Discord webhook sent for player: %player%"
+  webhook-failed: "Failed to send Discord webhook: %error%"
+  storage-connected: "Connected to %type% storage"
+  storage-error: "Storage error: %error%"

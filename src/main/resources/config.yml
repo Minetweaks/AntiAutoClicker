@@ -1,0 +1,97 @@
+# AntiAutoClicker Configuration
+
+# Development mode - sets captcha interval to 2 minutes and reduces
+# minimum attacks threshold for easier testing
+dev-mode: false
+
+# Discord webhook URL for reporting failed captchas
+# Leave empty to disable Discord notifications
+discord-webhook-url: ""
+
+# How often to issue captcha challenges (in minutes)
+captcha-interval-minutes: 30
+
+# How long a player has to respond to a captcha (in seconds)
+captcha-timeout-seconds: 120
+
+# Minimum number of entity attacks required before captcha is issued
+# This prevents captchas for normal players who barely fight mobs
+minimum-attacks-for-captcha: 100
+
+# Storage settings - persist player data across restarts
+storage:
+  # Storage type: "sqlite" (file-based) or "mysql" (database)
+  type: sqlite
+  
+  # MySQL/MariaDB settings (only used if type is "mysql")
+  mysql:
+    host: localhost
+    port: 3306
+    database: antiautoclick
+    username: root
+    password: ""
+    # Prefix for database tables
+    table-prefix: "aac_"
+
+# Detection settings
+detection:
+  # Minimum attack rate (attacks per second) to be considered suspicious
+  # KillAura typically attacks at maximum attack speed
+  suspicious-attack-rate: 8.0
+  
+  # How consistent the attack timing needs to be to trigger suspicion (0.0-1.0)
+  # Humans have variable timing, bots are more consistent
+  timing-consistency-threshold: 0.85
+  
+  # Window of time (in seconds) to analyze attack patterns
+  analysis-window-seconds: 30
+
+# Captcha settings
+captcha:
+  # How many times a player can fail before action is taken
+  max-failures: 3
+
+# Actions when captcha fails - Tiered punishment system
+# Each tier triggers based on the player's total failure count (persisted in storage)
+# Available placeholders: %player%, %uuid%, %attacks%, %suspicion%, %failures%
+actions:
+  # Notify players with permission when someone fails/receives captcha
+  notify-staff: true
+  
+  # Staff notification permission
+  staff-permission: "antiautoclick.notify"
+  
+  # Tiered punishments - executed based on total failure count
+  # If a player's failures don't match any tier, the highest tier that's <= their count is used
+  tiers:
+    # First offense - just a warning/kick
+    1:
+      kick: true
+      commands: []
+      # commands:
+      #   - "warn %player% First captcha failure - please respond to captchas"
+    
+    # Second offense - short tempban
+    2:
+      kick: false  # Don't kick if tempban handles it
+      commands:
+        - "tempban %player% 1h [AntiAutoClick] Second captcha failure"
+    
+    # Third offense - longer ban
+    3:
+      kick: false
+      commands:
+        - "tempban %player% 24h [AntiAutoClick] Third captcha failure - Suspected auto-clicker"
+    
+    # Fourth+ offense - permanent or very long ban
+    4:
+      kick: false
+      commands:
+        - "ban %player% [AntiAutoClick] Multiple captcha failures - Auto-clicking detected"
+  
+  # Special tier for cheating (attacking/moving with captcha GUI open)
+  # This is always more severe - immediately uses this punishment
+  cheating:
+    kick: false
+    commands:
+      - "ban %player% [AntiAutoClick] Detected attacking/moving with captcha open"
